@@ -1,7 +1,7 @@
 package com.example.calculatorservice.calculator;
 
-import com.example.calculatorservice.model.Product;
-import com.example.calculatorservice.model.ResponseList;
+import com.example.calculatorservice.model.Price;
+import com.example.calculatorservice.model.PriceList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -15,16 +15,14 @@ public class CalculatorService {
     Logger logger = LoggerFactory.getLogger(CalculatorController.class);
     private Calculator calc;
 
-
-    public ResponseList calculatePrice(List<Product> products) {
+    public PriceList calculatePrice(List<Price> prices) {
         logger.trace("In calculateMwSt in CalculatorService");
-        for (Product product : products) {
-            Double price = product.getPriceWithoutVat();
-            calc = new Calculator(price);
-            product.setPriceWithVat(calc.calculatePrice());
+        for (Price price : prices) {
+            Double p = price.getPrice();
+            calc = new Calculator(p);
+            price.setPrice(calc.calculatePrice());
         }
-        ResponseList productsWithVat = new ResponseList(products);
-        return productsWithVat;
+        return new PriceList(prices);
     }
 
 }
