@@ -16,7 +16,7 @@ public class CalculatorService {
     private Calculator calc;
 
     public PriceList calculatePrice(List<Price> prices) {
-        logger.trace("In calculateMwSt in CalculatorService");
+        logger.trace("In calculatePrice in CalculatorService");
         for (Price price : prices) {
             Double p = price.getPrice();
             calc = new Calculator(p);
