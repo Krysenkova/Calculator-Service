@@ -25,7 +25,7 @@ public class CalculatorTest {
     public void calculatePriceTestRight(){
         calculator = new Calculator(15.0);
         Double result = calculator.calculatePrice();
-        Assertions.assertEquals(17.85, result);
+        Assertions.assertEquals(17.86, result);
     }
 
     @Test
@@ -48,7 +48,5 @@ public class CalculatorTest {
         Double result = calculator.calculatePrice();
         Assertions.assertNotEquals(6.3427, result);
     }
-
-
 
 }
