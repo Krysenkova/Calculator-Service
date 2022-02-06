@@ -1,6 +1,8 @@
 package com.example.calculatorservice.calculator;
 
 import javax.validation.constraints.Positive;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Calculator {
 
@@ -15,9 +17,11 @@ public class Calculator {
         return price * MWST;
     }
     public Double calculatePrice() {
-       //TODO round till 2 signs after the comma
-        return price + calculateMwSt();
+        Double priceWithMwSt = price + calculateMwSt();
+        BigDecimal bd = new BigDecimal(priceWithMwSt).setScale(2,RoundingMode.UP);
+        return bd.doubleValue();
     }
+
     public Double getMwSt() {
         return MWST;
     }
