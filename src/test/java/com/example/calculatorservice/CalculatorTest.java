@@ -35,4 +35,20 @@ public class CalculatorTest {
         Assertions.assertNotEquals(10.0, result);
     }
 
+    @Test
+    public void roundPriceTestRight(){
+        calculator = new Calculator(5.33);
+        Double result = calculator.calculatePrice();
+        Assertions.assertNotEquals(6.34, result);
+    }
+
+    @Test
+    public void roundPriceTestWrong(){
+        calculator = new Calculator(5.33);
+        Double result = calculator.calculatePrice();
+        Assertions.assertNotEquals(6.3427, result);
+    }
+
+
+
 }
