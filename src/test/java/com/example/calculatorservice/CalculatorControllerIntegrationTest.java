@@ -15,6 +15,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -31,15 +33,18 @@ public class CalculatorControllerIntegrationTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+    private UUID testItemId_1 = UUID.randomUUID();
+    private UUID testItemId_2 = UUID.randomUUID();
+
     @Test
     void controllerTest() throws Exception {
         mockMvc = webAppContextSetup(webApplicationContext).build();
         List<Price> prices = new ArrayList<>();
-        prices.add(new Price(1, 34.0));
-        prices.add(new Price(2, 12.0));
+        prices.add(new Price(testItemId_1, 34.0));
+        prices.add(new Price(testItemId_2, 12.0));
         List<Price> pricesMwSt = new ArrayList<>();
-        pricesMwSt.add(new Price(1, 40.46));
-        pricesMwSt.add(new Price(2, 14.28));
+        pricesMwSt.add(new Price(testItemId_1, 40.46));
+        pricesMwSt.add(new Price(testItemId_2, 14.28));
         when(calculatorService.calculatePrice(prices)).thenReturn(new PriceList(pricesMwSt));
         mockMvc.perform(MockMvcRequestBuilders.post("/api/mwst")
                 .content(asJsonString(prices))
